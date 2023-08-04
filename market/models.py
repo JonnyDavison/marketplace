@@ -45,11 +45,11 @@ class Comment(models.Model):
 
 class Rating(models.Model):
     rating = models.IntegerField(default=0,
-        validators=[
-            MaxValueValidator(5),
-            MinValueValidator(0),
-        ]
-    )
+                                 validators=[
+                                             MaxValueValidator(5),
+                                             MinValueValidator(0),
+                                             ]
+                                 )
 
     def __str__(self):
         return str(self.pk)
