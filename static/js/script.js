@@ -8,11 +8,14 @@ let five = document.getElementById('fifth')
 // Gets the ratings form
 let starForm = document.querySelector('.ratings')
 
-
 // Stars array loops as cursour passes over the stars
 let stars = [one, two, three, four, five]
 stars.forEach(item=> item.addEventListener('mouseover', (event)=>{
     starSelect(event.target.id)
+}))
+
+stars.forEach(item=> item.addEventListener('click', (event)=>{
+    console.log('click event')
 }))
 
 
