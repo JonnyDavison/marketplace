@@ -57,3 +57,8 @@ let starSelect = (selection) => {
         }
     }
 }
+
+let starForm = document.querySelector('ratings')
+let csrf = document.getElementsByName('csrfmiddlewaretoken')
+console.log(starForm)
+console.log(csrf)
