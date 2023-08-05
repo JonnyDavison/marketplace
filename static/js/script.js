@@ -15,7 +15,7 @@ stars.forEach(item=> item.addEventListener('mouseover', (event)=>{
 }))
 
 stars.forEach(item=> item.addEventListener('click', (event)=>{
-    console.log('click event')
+    alert('click event')
 }))
 
 
