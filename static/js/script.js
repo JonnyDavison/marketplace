@@ -7,8 +7,20 @@ let three = document.getElementById('third')
 let four = document.getElementById('fourth')
 let five = document.getElementById('fifth')
 
-let stars = [one, two, three, four, five]
 
+let stars = [one, two, three, four, five]
 stars.forEach(item=> item.addEventListener('mouseover', (event)=>{
-    console.log(event.target)
+    starSelect(event.target.id)
 }))
+
+let starSelect = (selection) => {
+    switch(selection){
+        case 'first': {
+            one.classList.add('checked')
+            two.classList.remove('checked')
+            three.classList.remove('checked')
+            four.classList.remove('checked')
+            five.classList.remove('checked')
+        }
+    }
+}
