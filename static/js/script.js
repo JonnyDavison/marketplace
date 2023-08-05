@@ -7,12 +7,14 @@ let three = document.getElementById('third')
 let four = document.getElementById('fourth')
 let five = document.getElementById('fifth')
 
-
+// Stars array loops as cursour passes over the stars
 let stars = [one, two, three, four, five]
 stars.forEach(item=> item.addEventListener('mouseover', (event)=>{
     starSelect(event.target.id)
 }))
 
+
+// Select stars and add the class 'checked'
 let starSelect = (selection) => {
     switch(selection){
         case 'first': {
@@ -58,7 +60,12 @@ let starSelect = (selection) => {
     }
 }
 
-let starForm = document.querySelector('ratings')
+let starForm = document.querySelector('.ratings')
 let csrf = document.getElementsByName('csrfmiddlewaretoken')
-console.log(starForm)
-console.log(csrf)
+
+
+let addCheckedClass = (size) =>{
+    let fromChildren = starForm.children
+    console.log(fromChildren)
+}
+addCheckedClass(2)
