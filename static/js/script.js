@@ -18,43 +18,48 @@ stars.forEach(item=> item.addEventListener('mouseover', (event)=>{
 let starSelect = (selection) => {
     switch(selection){
         case 'first': {
-            one.classList.add('checked')
-            two.classList.remove('checked')
-            three.classList.remove('checked')
-            four.classList.remove('checked')
-            five.classList.remove('checked')
+            // one.classList.add('checked')
+            // two.classList.remove('checked')
+            // three.classList.remove('checked')
+            // four.classList.remove('checked')
+            // five.classList.remove('checked')
+            addCheckedClass(1)
             return
         }
         case 'second': {
-            one.classList.add('checked')
-            two.classList.add('checked')
-            three.classList.remove('checked')
-            four.classList.remove('checked')
-            five.classList.remove('checked')
+            // one.classList.add('checked')
+            // two.classList.add('checked')
+            // three.classList.remove('checked')
+            // four.classList.remove('checked')
+            // five.classList.remove('checked')
+            addCheckedClass(2)
             return
         }
         case 'third': {
-            one.classList.add('checked')
-            two.classList.add('checked')
-            three.classList.add('checked')
-            four.classList.remove('checked')
-            five.classList.remove('checked')
+            // one.classList.add('checked')
+            // two.classList.add('checked')
+            // three.classList.add('checked')
+            // four.classList.remove('checked')
+            // five.classList.remove('checked')
+            addCheckedClass(3)
             return
         }
         case 'fourth': {
-            one.classList.add('checked')
-            two.classList.add('checked')
-            three.classList.add('checked')
-            four.classList.add('checked')
-            five.classList.remove('checked')
+            // one.classList.add('checked')
+            // two.classList.add('checked')
+            // three.classList.add('checked')
+            // four.classList.add('checked')
+            // five.classList.remove('checked')
+            addCheckedClass(4)
             return
         }
         case 'fifth': {
-            one.classList.add('checked')
-            two.classList.add('checked')
-            three.classList.add('checked')
-            four.classList.add('checked')
-            five.classList.add('checked')
+            // one.classList.add('checked')
+            // two.classList.add('checked')
+            // three.classList.add('checked')
+            // four.classList.add('checked')
+            // five.classList.add('checked')
+            addCheckedClass(5)
             return
         }
     }
@@ -66,6 +71,13 @@ let csrf = document.getElementsByName('csrfmiddlewaretoken')
 
 let addCheckedClass = (size) =>{
     let fromChildren = starForm.children
-    console.log(fromChildren)
+    for (let i=0; i < fromChildren.length; i++){
+        if (i <= size) {
+            fromChildren[i].classList.add('checked')
+        } else {
+            fromChildren[i].classList.remove('checked')
+        }
+    }
 }
-addCheckedClass(2)
+
+
