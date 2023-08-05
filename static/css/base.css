@@ -119,6 +119,11 @@ body {
     color: #23BBBB;
 }
 
+.star-btn {
+    background-color: inherit !important;
+    border: 0 !important;
+}
+
 .link {
     color: #23BBBB;
     text-decoration: none;
