@@ -54,4 +54,4 @@ def rateing_value(request):
         rating.score = rate_value
         rating.save()
         return JsonResponse({'success': 'true', 'rating': rate_value}, safe=False)
-    return JsonResponse({'success':'false'})
+    return JsonResponse({'success': 'false'})

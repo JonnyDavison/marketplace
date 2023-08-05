@@ -9,7 +9,11 @@ let five = document.getElementById('fifth')
 let starForm = document.querySelector('.ratings')
 // Stars Array
 let stars = [one, two, three, four, five]
-
+// Get csrf token
+csrf = document.getElementsByName('csrfmiddlewaretoken')
+console.log(csrf)
+// Gets confirm box by id
+confrim = document.getElementById('confirm')
 
 
 // Stars array loops as cursour passes over the stars
@@ -41,10 +45,33 @@ stars.forEach(item=> item.addEventListener('click', (event)=>{
     starRating = getNumericValue(starValue)
     console.log(starRating)
 
+    let submitted = false
     starForm.addEventListener('submit', e=>{
         e.preventDefault()
+        if (submitted){
+            return
+        }
+        submitted = true
         let starId = e.target.id
     //     console.log(starId)
+        $.ajax({
+            type: 'POST',
+            url: 'market/rate/',
+            data: {
+                'csrfmiddlewaretoken': csrf[0].value,
+                'rate_id': starId,
+                'rate_value': starRating
+            },
+            success: function(response){
+                console.log(response)
+                confirm.innerHTML = `<h3>Your rating ${response.rating}</h3>`
+            },
+            error: function(error){
+                console.log(error)
+                confirm.innerHTML = `<h3>Ohh dear! Try again.</h3>`
+            }
+        })
+
     })
 }))
 
