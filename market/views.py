@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from .models import Post, Comment, Rating
+from django.http import JsonResponse
 
 
 def index(request):
@@ -37,10 +38,20 @@ class PostDetail(View):
         )
 
 
-
 def rating_view(request):
     rating = Rating.objects.filter(rating=0).first()
     context = {
         'rating': rating
     }
     return render(request, 'market/market.html', context)
+
+
+def rateing_value(request):
+    if request.method == 'POST':
+        rate_id = request.POST.get('rate_id')
+        rate_value = request.POST.get('rate_value')
+        rating = Rating.objects.get(id=rate_id)
+        rating.score = rate_value
+        rating.save()
+        return JsonResponse({'success': 'true', 'rating': rate_value}, safe=False)
+    return JsonResponse({'success':'false'})
