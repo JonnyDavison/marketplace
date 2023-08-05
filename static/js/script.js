@@ -21,6 +21,7 @@ let starSelect = (selection) => {
             three.classList.remove('checked')
             four.classList.remove('checked')
             five.classList.remove('checked')
+            return
         }
         case 'second': {
             one.classList.add('checked')
@@ -28,6 +29,7 @@ let starSelect = (selection) => {
             three.classList.remove('checked')
             four.classList.remove('checked')
             five.classList.remove('checked')
+            return
         }
         case 'third': {
             one.classList.add('checked')
@@ -35,6 +37,7 @@ let starSelect = (selection) => {
             three.classList.add('checked')
             four.classList.remove('checked')
             five.classList.remove('checked')
+            return
         }
         case 'fourth': {
             one.classList.add('checked')
@@ -42,6 +45,7 @@ let starSelect = (selection) => {
             three.classList.add('checked')
             four.classList.add('checked')
             five.classList.remove('checked')
+            return
         }
         case 'fifth': {
             one.classList.add('checked')
@@ -49,6 +53,7 @@ let starSelect = (selection) => {
             three.classList.add('checked')
             four.classList.add('checked')
             five.classList.add('checked')
+            return
         }
     }
 }
