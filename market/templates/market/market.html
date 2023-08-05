@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Market.html</h1>
+   <div class="row">
+        <div class="header-container text-center col-12">
+            <h1>MarketPlace</h1>
+            <p>Pick your favourite items from local foodies, like, rate, comment, share...</p>
+    </div>
+   </div>
 
     <div class="container-fluid">
         <div class="row">
@@ -31,6 +36,16 @@
                                         <i class="far fa-heart"></i>
                                         {{ post.number_of_likes }}
                                     </p>
+                                    <div class="row">
+                                        <div class="col-12">Ratings</div>
+                                        <div class="col text-center">
+                                            <span class="fa fa-star fa-2x checked"></span>
+                                            <span class="fa fa-star fa-2x checked"></span>
+                                            <span class="fa fa-star fa-2x checked"></span>
+                                            <span class="fa fa-star fa-2x"></span>
+                                            <span class="fa fa-star fa-2x"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -43,9 +58,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">Ratings</div>
-        </div>
+        
         {% if is_paginated %}
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
