@@ -37,6 +37,8 @@ let getNumericValue = (stringValue) => {
     } else {
         numericValue = 0
     }
+    rated = document.getElementById('rated');
+    rated.innerHTML = numericValue;
     return numericValue
 }
 
@@ -52,26 +54,6 @@ stars.forEach(item=> item.addEventListener('click', (event)=>{
             return
         }
         submitted = true
-        let starId = e.target.id
-    //     console.log(starId)
-        $.ajax({
-            type: 'POST',
-            url: 'market/rate/',
-            data: {
-                'csrfmiddlewaretoken': csrf[0].value,
-                'rate_id': starId,
-                'rate_value': starRating
-            },
-            success: function(response){
-                console.log(response)
-                confirm.innerHTML = `<h3>Your rating ${response.rating}</h3>`
-            },
-            error: function(error){
-                console.log(error)
-                confirm.innerHTML = `<h3>Ohh dear! Try again.</h3>`
-            }
-        })
-
     })
 }))
 
