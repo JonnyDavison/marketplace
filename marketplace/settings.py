@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'cloudinary',
     'django_summernote',
+    'crispy_forms',
 
     'allauth',
     'allauth.account',
@@ -91,6 +92,9 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 WSGI_APPLICATION = 'marketplace.wsgi.application'
 
@@ -159,3 +163,4 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
