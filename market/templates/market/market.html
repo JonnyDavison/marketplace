@@ -37,21 +37,7 @@
                                         <i class="far fa-heart"></i>
                                         {{ post.number_of_likes }}
                                     </p>
-                                    <div class="row">
-                                        <div class="col-12">Ratings</div>
-                                        <div class="col text-center">
-                                           
-                                            <form action="" class="ratings" method="POST" id="{{ ratings.starId }}">
-                                                {% csrf_token %}
-                                                <button type="submit" class="fa fa-star fa-2x star-btn checked" id="first"></button>
-                                                <button type="submit" class="fa fa-star fa-2x star-btn" id="second"></button>
-                                                <button type="submit" class="fa fa-star fa-2x star-btn" id="third"></button>
-                                                <button type="submit" class="fa fa-star fa-2x star-btn" id="fourth"></button>
-                                                <button type="submit" class="fa fa-star fa-2x star-btn" id="fifth"></button>
-                                            </form>
-                                                                                        
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -60,8 +46,7 @@
                             <div class="row">
                         {% endif %}
                     {% endfor %}
-                    <br>
-                    <div id="confirm"></div>
+                    
                 </div>
             </div>
         </div>
@@ -80,5 +65,4 @@
             </nav>
         {% endif %}
     </div>
-    <script src="/static/js/script.js" defer></script>
 {% endblock %}

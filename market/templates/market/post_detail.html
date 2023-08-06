@@ -48,6 +48,22 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-12">Ratings</div>
+        <div class="col text-center">
+           
+            <form action="" class="ratings" method="POST" id="{{ ratings.starId }}">
+                {% csrf_token %}
+                <button type="submit" class="first fa fa-star fa-2x star-btn checked" id="first"></button>
+                <button type="submit" class="second fa fa-star fa-2x star-btn" id="second"></button>
+                <button type="submit" class="third fa fa-star fa-2x star-btn" id="third"></button>
+                <button type="submit" class="fourth fa fa-star fa-2x star-btn" id="fourth"></button>
+                <button type="submit" class="fifth fa fa-star fa-2x star-btn" id="fifth"></button>
+            </form>
+            <br>
+            <div id="confirm"> Your rating: <a href="rating" id="rated"></a></div>                                    
+        </div>
+    </div>
+    <div class="row">
         <div class="col">
             <hr>
         </div>
@@ -81,5 +97,5 @@
         </div>
     </div>
 </div>
-
+<script src="/static/js/script.js" defer></script>
 {% endblock content %}
