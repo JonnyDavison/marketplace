@@ -43,13 +43,16 @@ class Comment(models.Model):
         return f'Reaction {self.body} Posted by {self.name}'
 
 
-class Rating(models.Model):
-    rating = models.IntegerField(default=0,
-                                 validators=[
-                                             MaxValueValidator(5),
-                                             MinValueValidator(0),
-                                             ]
-                                 )
+class ReviewRating(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="rating_user", null=True)
+    subject = models.CharField(max_length=100, blank=True)
+    review = models.TextField(max_length=500, blank=True)
+    rating = models.FloatField()
+    ip = models.CharField(max_length=20, blank=True)
+    status = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.pk)
+        return self.subject
