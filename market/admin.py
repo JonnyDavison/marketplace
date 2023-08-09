@@ -33,6 +33,7 @@ class CommentAdmin(admin.ModelAdmin):
     def approve_comments(self, request, queryset):
         queryset.update(approved=True)
 
+
 class RatingAdmin(admin.ModelAdmin):
     list_display = (
         'post',
@@ -40,5 +41,6 @@ class RatingAdmin(admin.ModelAdmin):
         'rating',
         'review'
     )
+
 
 admin.site.register(ReviewRating, RatingAdmin)

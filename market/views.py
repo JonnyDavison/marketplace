@@ -73,14 +73,12 @@ class PostDetail(View):
 
 def submit_review(request, post_id):
     url = request.META.get('HTTP_REFERER')
-
     if request.method == 'POST':
         try:
             reviews = ReviewRating.objects.get(user__id=request.user.id,
                                                post__id=post_id)
             form = ReviewForm(request.POST, instance=reviews)
             form.save()
-
             return redirect(url)
         except ReviewRating.DoesNotExist:
             form = ReviewForm(request.POST)
@@ -93,5 +91,4 @@ def submit_review(request, post_id):
                 data.post_id = post_id
                 data.user_id = request.user.id
                 data.save()
-
                 return redirect(url)
