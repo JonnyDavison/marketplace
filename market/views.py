@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
-from .models import Post, Comment, Rating
+from .models import Post, Comment, ReviewRating
 from django.http import JsonResponse
+from .forms import CommentForm, ReviewForm
 
 
 def index(request):
@@ -33,25 +34,64 @@ class PostDetail(View):
             {
                 "post": post,
                 "comments": comments,
-                "liked": liked
+                "commented": False,
+                "liked": liked,
+                "comment_form": CommentForm()
+            },
+        )
+
+    def post(self, request, slug, *args, **kwargs):
+        queryset = Post.objects.filter(status=1)
+        post = get_object_or_404(queryset, slug=slug)
+        comments = post.comments.filter(approved=True).order_by("-created_on")
+        liked = False
+        if post.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            comment_form.instance.email = request.user.email
+            comment_form.instance.name = request.user.username
+            comment = comment_form.save(commit=False)
+            comment.comment = post
+            comment.save()
+        else:
+            comment_form = CommentForm()
+
+        return render(
+            request,
+            "market/post_detail.html",
+            {
+                "post": post,
+                "comments": comments,
+                "commented": True,
+                "liked": liked,
+                "comment_form": comment_form
             },
         )
 
 
-def rating_view(request):
-    rating = Rating.objects.filter(rating=0).first()
-    context = {
-        'rating': rating
-    }
-    return render(request, 'market/market.html', context)
+def submit_review(request, post_id):
+    url = request.META.get('HTTP_REFERER')
 
-
-def rateing_value(request):
     if request.method == 'POST':
-        rate_id = request.POST.get('rate_id')
-        rate_value = request.POST.get('rate_value')
-        rating = Rating.objects.get(id=rate_id)
-        rating.score = rate_value
-        rating.save()
-        return JsonResponse({'success': 'true', 'rating': rate_value}, safe=False)
-    return JsonResponse({'success': 'false'})
+        try:
+            reviews = ReviewRating.objects.get(user__id=request.user.id,
+                                               post__id=post_id)
+            form = ReviewForm(request.POST, instance=reviews)
+            form.save()
+
+            return redirect(url)
+        except ReviewRating.DoesNotExist:
+            form = ReviewForm(request.POST)
+            if form.is_valid():
+                data = ReviewRating()
+                data.subject = form.cleaned_data['subject']
+                data.rating = form.cleaned_data['rating']
+                data.review = form.cleaned_data['review']
+                data.ip = request.META.get('REMOTE_ADDR')
+                data.post_id = post_id
+                data.user_id = request.user.id
+                data.save()
+
+                return redirect(url)
