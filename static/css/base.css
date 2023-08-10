@@ -2,9 +2,13 @@
 
 body {
     font-family: 'Raleway', sans-serif;
+    background-color: #fff;
+    background-size: cover;
 }
 
-
+.market-color {
+    color: #4A4A4F;
+}
 .brand {
     font-size: 1.4rem;
     font-weight: 700;
@@ -29,6 +33,14 @@ body {
 
 .main-bg {
     background-color: #F9FAFC;
+}
+
+.index-bg {
+    background-image: url('https://res.cloudinary.com/jd641326/image/upload/v1691664526/marketbg_swmpih.jpg');
+    background-size: cover;
+    height: calc(100vh - 164px);
+    width: 100%;
+    overflow: hidden;
 }
 
 .card {

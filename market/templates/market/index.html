@@ -2,14 +2,25 @@
 {% load static %}
 
 {% block content %}
-
+<div class="index-bg">
     <div class="container h100">
         <div class="row h100">
             <div class="col-12 my-auto">
-                <h1 class="display-1">Market Place</h1>
-                <h2 class="text-uppercase py-3">Food Glorious Food</h2>
+                <h1 class="display-1 text-white"><strong>Market Place</strong></h1>
+                <h2 class="text-uppercase py-3 text-white">Food Glorious Food</h2>
+                <p class="py-3 text-white">
+                    On Market Place we want to bring the tradional street food markets online, 
+                    and give you the consumer the change to engage in your favorite Street food treats. 
+                    Share your love of street food with with like minded people, the Vendors and foodies! 
+                    Leave a message for them to Pop-up on your local scene and rate, review and share those street food eats! 
+                </p>
+                <div class="my-5">
+                    <h6>
+                        <a href="{% url 'market_posts' %}" class="btn-signup btn btn-lg text-uppercase py-3">Get Invloved Here</a>
+                    </h6>
+                </div>
             </div>
         </div>
     </div>
-
+</div>
 {% endblock %}

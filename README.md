@@ -336,8 +336,8 @@ The testing documentation can be found at [TESTING.md](TESTING.md)
 ### Media
 Stock images where downloaded from [Pexels](https://www.pexels.com/).
 <br>
-The home page background image was downlaoded from Pexels, and attributed to 
-The menu page background image was downlaoded from Pexels, and attributed to Elevate
+The home page background image was downlaoded from Pexels, and attributed to David Egon
+The XXXXXX page background image was downlaoded from Pexels, and attributed to XXXXXX
 Test posts iamges wehre downlaoded from Pexels, and attributed to Cottonbro Studio, Mark Neal, Adrian Dorobantu 
 
 Licencing for using Pexel images can be found [here](https://www.pexels.com/license/) and has been adhered to across the site
