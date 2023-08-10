@@ -170,7 +170,7 @@ body {
     font-family: FontAwesome;
     content: "\f005";
     margin: 0.1rem;
-    padding: 0.3rem 0;
+    padding: 0.3rem 1rem;
     cursor: pointer;
 }
 
