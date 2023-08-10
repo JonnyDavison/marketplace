@@ -8,4 +8,5 @@ urlpatterns = [
          name='post_detail'),
     path('market/submit_review/<int:post_id>', views.submit_review,
          name='submit_review'),
+    path('like/<slug:slug>', views.PostLike.as_view(), name="post_like"),
 ]
