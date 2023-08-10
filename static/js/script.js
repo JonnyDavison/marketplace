@@ -1,44 +1,47 @@
 // Variables
 // Getting the stars
-let one = document.getElementById('first')
-let two = document.getElementById('second')
-let three = document.getElementById('third')
-let four = document.getElementById('fourth')
-let five = document.getElementById('fifth')
-// Gets the ratings form
-let starForm = document.querySelector('.ratings')
+let five = document.getElementById('rate10')
+let four_half = document.getElementById('rate9')
+let four = document.getElementById('rate8')
+let three_half = document.getElementById('rate7')
+let three = document.getElementById('rate6')
+let two_half = document.getElementById('rate5')
+let two = document.getElementById('rate4')
+let one_half = document.getElementById('rate3')
+let one = document.getElementById('rate2')
+let half = document.getElementById('rate1')
+
 // Stars Array
-let stars = [one, two, three, four, five]
-// Get csrf token
-csrf = document.getElementsByName('csrfmiddlewaretoken')
-console.log(csrf)
-// Gets confirm box by id
-confrim = document.getElementById('confirm')
-
-
-// Stars array loops as cursour passes over the stars
-stars.forEach(item=> item.addEventListener('mouseover', (event)=>{
-    starSelect(event.target.id)
-}))
+let stars = [five, four_half, four, three_half, three, two_half, two, one_half, one, half]
 
 // Get numeric value
 let getNumericValue = (stringValue) => {
     let numericValue;
-    if(stringValue == 'first'){
-        numericValue = 1
-    } else if (stringValue == 'second') {
-        numericValue = 2
-    } else if (stringValue == 'third') {
-        numericValue = 3
-    } else if (stringValue == 'fourth') {
-        numericValue = 4
-    } else if (stringValue == 'fifth') {
+    if (stringValue == 'rate10'){
         numericValue = 5
+    } else if (stringValue == 'rate9') {
+        numericValue = 4.5
+    } else if (stringValue == 'rate8') {
+        numericValue = 4
+    } else if (stringValue == 'rate7') {
+        numericValue = 3.5
+    } else if (stringValue == 'rate6') {
+        numericValue = 3
+    } else if (stringValue == 'rate5') {
+        numericValue = 2.5
+    } else if (stringValue == 'rate4') {
+        numericValue = 2
+    } else if (stringValue == 'rate3') {
+        numericValue = 1.5
+    } else if (stringValue == 'rate2') {
+        numericValue = 1
+    } else if (stringValue == 'rate1') {
+        numericValue = 0.5
     } else {
         numericValue = 0
     }
-    rated = document.getElementById('rated');
-    rated.innerHTML = numericValue;
+    rates = document.getElementById('rated');
+    rates.innerHTML = numericValue;
     return numericValue
 }
 
@@ -46,56 +49,4 @@ stars.forEach(item=> item.addEventListener('click', (event)=>{
     let starValue = event.target.id
     starRating = getNumericValue(starValue)
     console.log(starRating)
-
-    let submitted = false
-    starForm.addEventListener('submit', e=>{
-        e.preventDefault()
-        if (submitted){
-            return
-        }
-        submitted = true
-    })
 }))
-
-
-
-
-// Select stars and add the class 'checked'
-let starSelect = (selection) => {
-    switch(selection){
-        case 'first': {
-            addCheckedClass(1)
-            return
-        }
-        case 'second': {
-            addCheckedClass(2)
-            return
-        }
-        case 'third': {
-            addCheckedClass(3)
-            return
-        }
-        case 'fourth': {
-            addCheckedClass(4)
-            return
-        }
-        case 'fifth': {
-            addCheckedClass(5)
-            return
-        }
-    }
-}
-
-// Adds/removes the checked class from the star button
-let addCheckedClass = (size) =>{
-    let fromChildren = starForm.children
-    for (let i=0; i < fromChildren.length; i++){
-        if (i <= size) {
-            fromChildren[i].classList.add('checked')
-        } else {
-            fromChildren[i].classList.remove('checked')
-        }
-    }
-}
-
-
