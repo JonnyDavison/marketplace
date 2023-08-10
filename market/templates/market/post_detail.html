@@ -56,16 +56,17 @@
                     <div class="ratings rate" id="">
                         <input type="radio" name="rating" id="rate10" value="5" required><label for="rate10" title="5"></label>
                         <input type="radio" name="rating" id="rate9" value="4.5" required><label for="rate9" title= 4.5 class="half"></label>
-                        <input type="radio" name="rating" id="rate8" value="4" required><label for="rate10" title="4"></label>
-                        <input type="radio" name="rating" id="rate7" value="3.5" required><label for="rate9" title= 3.5 class="half"></label>
-                        <input type="radio" name="rating" id="rate6" value="3" required><label for="rate10" title="3"></label>
-                        <input type="radio" name="rating" id="rate5" value="2.5" required><label for="rate9" title= 2.5 class="half"></label>
-                        <input type="radio" name="rating" id="rate4" value="2" required><label for="rate10" title="2"></label>
-                        <input type="radio" name="rating" id="rate3" value="1.5" required><label for="rate9" title= 1.5 class="half"></label>
-                        <input type="radio" name="rating" id="rate2" value="1" required><label for="rate10" title="1"></label>
-                        <input type="radio" name="rating" id="rate1" value="0.5" required><label for="rate9" title= 0.5 class="half"></label>
+                        <input type="radio" name="rating" id="rate8" value="4" required><label for="rate8" title="4"></label>
+                        <input type="radio" name="rating" id="rate7" value="3.5" required><label for="rate7" title= 3.5 class="half"></label>
+                        <input type="radio" name="rating" id="rate6" value="3" required><label for="rate6" title="3"></label>
+                        <input type="radio" name="rating" id="rate5" value="2.5" required><label for="rate5" title= 2.5 class="half"></label>
+                        <input type="radio" name="rating" id="rate4" value="2" required><label for="rate4" title="2"></label>
+                        <input type="radio" name="rating" id="rate3" value="1.5" required><label for="rate3" title= 1.5 class="half"></label>
+                        <input type="radio" name="rating" id="rate2" value="1" required><label for="rate2" title="1"></label>
+                        <input type="radio" name="rating" id="rate1" value="0.5" required><label for="rate1" title= 0.5 class="half"></label>
                     </div>
                     <br>
+                        <div id="confirm"> Your rating: <a href="rating" id="rated"></a></div>
                     <br>
                     Your headline!:
                     <input type="text" class="form-control" name="subject">
@@ -75,9 +76,6 @@
                     <br>
                     <input type="submit" class="btn btn-signup btn-lg" value="Submit">
                 </div>
-                {% if message %}
-                    {{ message }}
-                {% endif %}
             </form>
             <br>
             {% if user.is_authenticated %}
@@ -134,5 +132,5 @@
         </div>
     </div>
 </div>
-<!-- <script src="/static/js/script.js" defer></script> -->
+<script src="/static/js/script.js" defer></script>
 {% endblock content %}

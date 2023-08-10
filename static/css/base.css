@@ -166,11 +166,11 @@ body {
 /* Show Stars */
 .rate > label:before {
     display: inline-block;
-    font-size: 1.1rem;
+    font-size: 2rem;
     font-family: FontAwesome;
     content: "\f005";
-    margin: 0;
-    padding: 0.3rem 0.2rem;
+    margin: 0.1rem;
+    padding: 0.3rem 0;
     cursor: pointer;
 }
 
