@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import generic, View
 from .models import Post, Comment, ReviewRating
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect
 from .forms import CommentForm, ReviewForm
+from django.contrib import messages
 
 
 def index(request):
@@ -27,7 +28,6 @@ class PostDetail(View):
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
             liked = True
-
         return render(
             request,
             "market/post_detail.html",
@@ -55,8 +55,12 @@ class PostDetail(View):
             comment = comment_form.save(commit=False)
             comment.comment = post
             comment.save()
+            messages.success(request, 'You have successfully added a Comment')
         else:
             comment_form = CommentForm()
+            messages.info(request,
+                          'Oops! somthing wasnt right there,\
+                            make sure you are logged and try again!')
 
         return render(
             request,
@@ -69,6 +73,20 @@ class PostDetail(View):
                 "comment_form": comment_form
             },
         )
+
+
+class PostLike(View):
+
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+            messages.info(request,
+                          'Sorry you didnt love this as much as we do!')
+        else:
+            post.likes.add(request.user)
+            messages.success(request, 'We loved this too!')
+        return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
 def submit_review(request, post_id):
