@@ -46,24 +46,13 @@ class Comment(models.Model):
 
 
 class ReviewRating(models.Model):
-    rates = (
-        ('0.5', '0.5'),
-        ('1', '1'),
-        ('1.5', '1.5'),
-        ('2', '2'),
-        ('2.5', '2.5'),
-        ('3', '3'),
-        ('3.5', '3.5'),
-        ('4', '4'),
-        ('4.5', '4.5'),
-        ('5', '5'),
-    )
-    post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
+  
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE,
                              related_name="rating_user")
     subject = models.CharField(max_length=100, blank=True)
     review = models.TextField(max_length=500, blank=True)
-    rating = models.FloatField(choices=rates)
+    rating = models.FloatField()
 
     def __str__(self):
         return self.post.slug
