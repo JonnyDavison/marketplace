@@ -3,7 +3,7 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from .models import *
-
+from .forms import orderForm
 
 def index(request):
     """ a view to retuern the index page """
@@ -48,3 +48,12 @@ def products(request):
         'products': products
     }
     return render(request, 'market/products.html', context)
+
+
+def createOrder(request):
+    form = orderForm()
+
+    context = {
+        'form': form
+    }
+    return render(request, 'market/order_form.html', context)
