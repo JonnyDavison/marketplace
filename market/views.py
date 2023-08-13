@@ -82,6 +82,7 @@ def updateOrder(request, pk):
 
 
 def deleteOrder(request, pk):
+    
 
     context = {
 
