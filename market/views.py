@@ -2,9 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.forms import inlineformset_factory
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .models import *
-from .forms import orderForm
+from .forms import orderForm, CreateUserForm
 
 
 def index(request):
@@ -98,9 +99,21 @@ def deleteOrder(request, pk):
 
 
 def registerPage(request):
-    context = {
 
-    }
+    if request.user.is_authenticated:
+        return redirect('index')
+    else:
+        form = CreateUserForm()
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, 'Account was created for ' + user)
+
+                return redirect('login')
+
+        context = {'form': form}
     return render(request, 'market/register.html', context)
 
 
