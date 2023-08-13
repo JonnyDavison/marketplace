@@ -4,15 +4,16 @@ from django.http import HttpResponseRedirect
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
 from .forms import orderForm, CreateUserForm
-from .decorators import unauthenticated_user, allowed_users
+from .decorators import unauthenticated_user, allowed_users, admin_only
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin'])
+@admin_only
 def index(request):
     """ a view to retuern the index page """
     orders = Order.objects.all()
@@ -36,6 +37,7 @@ def index(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def customer(request, pk):
     customer = Customer.objects.get(id=pk)
 
@@ -51,6 +53,7 @@ def customer(request, pk):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def products(request):
     products = Product.objects.all()
 
@@ -80,6 +83,7 @@ def createOrder(request, pk):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def updateOrder(request, pk):
 
     order = Order.objects.get(id=pk)
@@ -112,13 +116,20 @@ def deleteOrder(request, pk):
 
 @unauthenticated_user
 def registerPage(request):
+
     form = CreateUserForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for ' + user)
+            user = form.save()
+            username = form.cleaned_data.get('username')
+
+            group = Group.objects.get(name='customer')
+            user.groups.add(group)
+            Customer.objects.create(
+                user=user
+            )
+            messages.success(request, 'Account was created for ' + username)
 
             return redirect('login')
 
@@ -140,8 +151,8 @@ def loginPage(request):
         else:
             messages.info(request, 'Username OR password is incorrect')
 
-        context = {}
-        return render(request, 'market/login.html', context)
+    context = {}
+    return render(request, 'market/login.html', context)
 
 
 def logoutUser(request):
@@ -149,9 +160,13 @@ def logoutUser(request):
     return redirect('login')
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def userPage(request):
 
-    context = {
+    orders = request.user.customer.order_set.all()
 
+    context = {
+        'orders': orders
     }
     return render(request, 'market/user.html', context)
