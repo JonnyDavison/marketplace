@@ -23,7 +23,8 @@ def allowed_users(allowed_roles=[]):
             if group in allowed_roles:
                 return view_func(request, *args, **kwargs)
             else:
-                return HttpResponse('Your dont have the credntials for this page')
+                return HttpResponse('Your dont have the credntials for \
+                                     this page')
         return wrapper_func
     return decorator
 
