@@ -10,6 +10,7 @@ from .models import *
 from .forms import orderForm, CreateUserForm
 
 
+@login_required(login_url='login')
 def index(request):
     """ a view to retuern the index page """
     orders = Order.objects.all()
@@ -32,6 +33,7 @@ def index(request):
     return render(request, 'market/index.html', context)
 
 
+@login_required(login_url='login')
 def customer(request, pk):
     customer = Customer.objects.get(id=pk)
 
@@ -46,6 +48,7 @@ def customer(request, pk):
     return render(request, 'market/customer.html', context)
 
 
+@login_required(login_url='login')
 def products(request):
     products = Product.objects.all()
 
@@ -55,7 +58,9 @@ def products(request):
     return render(request, 'market/products.html', context)
 
 
+@login_required(login_url='login')
 def createOrder(request, pk):
+    
     OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=6)
     customer = Customer.objects.get(id=pk)
     formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
@@ -71,6 +76,7 @@ def createOrder(request, pk):
     return render(request, 'market/order_form.html', context)
 
 
+@login_required(login_url='login')
 def updateOrder(request, pk):
 
     order = Order.objects.get(id=pk)
@@ -88,6 +94,7 @@ def updateOrder(request, pk):
     return render(request, 'market/order_form.html', context)
 
 
+@login_required(login_url='login')
 def deleteOrder(request, pk):
 
     order = Order.objects.get(id=pk)
