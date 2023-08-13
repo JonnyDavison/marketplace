@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block content %}
-
-    <p>Are you sure you want to delete " {{item}} "</p>
+<div class="card card-body col-md-5 offset-3">
+    <p>Are you sure you want to delete "{{order}}"</p>
 
     <form action="" method="POST">
         <a href="{% url 'index' %}">Cancel</a>
         <input class="btn btn-danger" type="submit" name="Confirm">
     </form>
-
+</div>
 {% endblock %}

@@ -82,9 +82,9 @@ def updateOrder(request, pk):
 
 
 def deleteOrder(request, pk):
-    
 
+    order = Order.objects.get(id=pk)
     context = {
-
+        'order': order
     }
     return render(request, 'market/delete.html', context)
