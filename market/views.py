@@ -27,9 +27,18 @@ def index(request):
     return render(request, 'market/index.html', context)
 
 
-def customer(request):
+def customer(request, pk):
+    customer = Customer.objects.get(id=pk)
 
-    return render(request, 'market/customer.html')
+    orders = customer.order_set.all()
+    order_count = orders.count()
+
+    context = {
+        'customer': customer,
+        'orders': orders,
+        'order_count': order_count
+        }
+    return render(request, 'market/customer.html', context)
 
 
 def products(request):
