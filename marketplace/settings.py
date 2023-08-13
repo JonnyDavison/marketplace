@@ -17,6 +17,8 @@ from django.contrib.messages import constants as messages
 if os.path.isfile('env.py'):
     import env
 
+		
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
@@ -47,8 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'cloudinary',
-    'django_summernote',
-    'crispy_forms',
 
     'allauth',
     'allauth.account',
