@@ -8,10 +8,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
 from .forms import orderForm, CreateUserForm
-from .decorators import unauthenticated_user
+from .decorators import unauthenticated_user, allowed_users
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def index(request):
     """ a view to retuern the index page """
     orders = Order.objects.all()
