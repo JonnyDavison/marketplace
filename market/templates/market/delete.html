@@ -2,10 +2,11 @@
 {% load static %}
 
 {% block content %}
-<div class="card card-body col-md-5 offset-3">
-    <p>Are you sure you want to delete "{{order}}"</p>
+<div class="card card-body col-12 col-md-5 offset-md-3">
+    <p>Are you sure you want to cancel "{{order}}"?</p>
 
-    <form action="" method="POST">
+    <form action="{% url 'delete_order' order.id %}" method="POST">
+        {% csrf_token %}
         <a href="{% url 'index' %}">Cancel</a>
         <input class="btn btn-danger" type="submit" name="Confirm">
     </form>
