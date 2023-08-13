@@ -60,8 +60,9 @@ def products(request):
 
 @login_required(login_url='login')
 def createOrder(request, pk):
-    
-    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=6)
+
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product',
+                                         'status'), extra=6)
     customer = Customer.objects.get(id=pk)
     formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
     if request.method == "POST":
