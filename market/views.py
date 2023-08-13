@@ -63,3 +63,19 @@ def createOrder(request):
     }
     return render(request, 'market/order_form.html', context)
 
+
+def updateOrder(request, pk):
+
+    order = Order.objects.get(id=pk)
+    form = orderForm(instance=order)
+
+    if request.method == "POST":
+        form = orderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+
+    context = {
+        'form': form
+    }
+    return render(request, 'market/order_form.html', context)
