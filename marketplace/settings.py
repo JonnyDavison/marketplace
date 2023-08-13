@@ -34,7 +34,7 @@ DEBUG = False
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # ALLOWED_HOSTS = ['8000-jonnydaviso-marketplace-clsdzlh6337.ws-eu103.gitpod.io']
-ALLOWED_HOSTS = ['https://market-8c7ce1538eb0.herokuapp.com/']
+ALLOWED_HOSTS = ['market-8c7ce1538eb0.herokuapp.com']
 
 # Application definition
 
