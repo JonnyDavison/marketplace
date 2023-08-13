@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-<form action="" method="POST">
-    {% csrf_token %}
-        {{ form }}
-    <input type="submit" name="Submit">
-</form>
-   
+<div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+            {{ form }}
+            <hr>
+            {% endfor %}
+            <input type="submit" name="Submit">
+        </form>
+    </div>
+</div>
 {% endblock %}
