@@ -79,3 +79,11 @@ def updateOrder(request, pk):
         'form': form
     }
     return render(request, 'market/order_form.html', context)
+
+
+def deleteOrder(request, pk):
+
+    context = {
+
+    }
+    return render(request, 'market/delete.html', context)
