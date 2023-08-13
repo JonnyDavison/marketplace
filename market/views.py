@@ -95,3 +95,17 @@ def deleteOrder(request, pk):
         'order': order
     }
     return render(request, 'market/delete.html', context)
+
+
+def registerPage(request):
+    context = {
+
+    }
+    return render(request, 'market/register.html', context)
+
+
+def loginPage(request):
+    context = {
+
+    }
+    return render(request, 'market/login.html', context)
