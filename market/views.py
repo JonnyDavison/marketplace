@@ -8,3 +8,13 @@ def index(request):
     """ a view to retuern the index page """
 
     return render(request, 'market/index.html')
+
+
+def customer(request):
+
+    return render(request, 'market/customer.html')
+
+
+def products(request):
+
+    return render(request, 'market/products.html')
