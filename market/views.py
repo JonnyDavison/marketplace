@@ -52,6 +52,8 @@ def products(request):
 
 def createOrder(request):
     form = orderForm()
+    if request.method == "POST":
+        print('POST', request.POST)
 
     context = {
         'form': form
