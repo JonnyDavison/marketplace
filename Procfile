@@ -1,1 +1,1 @@
-web: guincorn marketplace.wsgi
+web: gunicorn marketplace.wsgi
