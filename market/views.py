@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.forms import inlineformset_factory
 from django.contrib import messages
 from .models import *
 from .forms import orderForm
+
 
 def index(request):
     """ a view to retuern the index page """
@@ -11,6 +13,7 @@ def index(request):
     customers = Customer.objects.all()
 
     total_customers = customers.count()
+
     total_orders = orders.count()
     delivered = orders.filter(status='Delivered').count()
     pending = orders.filter(status='Pending').count()
@@ -18,11 +21,10 @@ def index(request):
     context = {
         'orders': orders,
         'customers': customers,
-        'total_customers': total_customers,
         'total_orders': total_orders,
         'delivered': delivered,
         'pending': pending
-    }
+        }
 
     return render(request, 'market/index.html', context)
 
@@ -50,16 +52,18 @@ def products(request):
     return render(request, 'market/products.html', context)
 
 
-def createOrder(request):
-    form = orderForm()
+def createOrder(request, pk):
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=6)
+    customer = Customer.objects.get(id=pk)
+    formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
     if request.method == "POST":
-        form = orderForm(request.POST)
-        if form.is_valid():
-            form.save()
+        formset = OrderFormSet(request.POST, instance=customer)
+        if formset.is_valid():
+            formset.save()
             return redirect('index')
 
     context = {
-        'form': form
+        'formset': formset
     }
     return render(request, 'market/order_form.html', context)
 
