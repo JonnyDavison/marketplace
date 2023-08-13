@@ -5,9 +5,9 @@
     <div class="col-12 col-md-6 offset-md-3">
         <form action="" method="POST">
             {% csrf_token %}
-            {{ formset.management_form }}
-            {% for form in formset %}
-            {{ form }}
+            {{ form.management_form }}
+            {% for field in form %}
+            {{ field }}
             <hr>
             {% endfor %}
             <input type="submit" name="Submit">

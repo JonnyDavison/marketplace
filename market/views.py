@@ -71,19 +71,19 @@ def createOrder(request, pk):
     customer = Customer.objects.get(id=pk)
     formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
     if request.method == "POST":
+        form = orderForm(request.POST)
         formset = OrderFormSet(request.POST, instance=customer)
         if formset.is_valid():
             formset.save()
             return redirect('index')
 
     context = {
-        'formset': formset
+        'form': formset
     }
     return render(request, 'market/order_form.html', context)
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin'])
 def updateOrder(request, pk):
 
     order = Order.objects.get(id=pk)
