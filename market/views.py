@@ -10,7 +10,7 @@ from django.contrib import messages
 from .models import *
 from .forms import OrderForm, CreateUserForm, CustomerForm, ProductForm
 from .decorators import unauthenticated_user, allowed_users, admin_only
-# from .filters import OrderFilter
+
 
 
 @login_required(login_url='login')
