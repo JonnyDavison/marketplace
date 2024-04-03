@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-12 col-md-6 offset-md-3 pe-1 pb-5 mb-5">
+        <form action="{% url 'add_product' %}" method="POST" class="form mb-2" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                {{ field }}
+            {% endfor %}
+            <div class="float-end pb-5 mb-5">
+                <a href="{% url 'products' %}" class="btn btn-secondary"> Cancel</a>
+                <button class="btn btn-primary" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col pb-5 mb-5 d-xs-flex d-md-none"></div>
+</div>
+{% endblock %}
