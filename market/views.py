@@ -105,7 +105,7 @@ def edit_product(request, product_id):
         return redirect(reverse('/'))
 
     product = get_object_or_404(Product, pk=product_id)
-    
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
@@ -152,7 +152,7 @@ def createOrder(request, pk):
         formset = OrderFormSet(request.POST, instance=customer)
         if formset.is_valid():
             formset.save()
-            return redirect('index')
+            return redirect(reverse ('customer', args=[customer.id]))
 
     context = {
         'form': formset
@@ -187,7 +187,7 @@ def deleteOrder(request, pk):
     order = Order.objects.get(id=pk)
     if request.method == 'POST':
         order.delete()
-        return redirect('index')
+        return redirect('/')
     context = {
         'order': order
     }
@@ -219,7 +219,7 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return redirect('/')
         else:
             messages.info(request, 'Username OR password is incorrect')
 
