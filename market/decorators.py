@@ -1,11 +1,12 @@
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
+from django.http import HttpResponse
 
 
 def unauthenticated_user(view_func):
     def wrapper_func(request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('home')
+            return redirect('index')
         else:
             return view_func(request, *args, **kwargs)
 
@@ -23,7 +24,7 @@ def allowed_users(allowed_roles=[]):
             if group in allowed_roles:
                 return view_func(request, *args, **kwargs)
             else:
-                return HttpResponse('Your dont have the credntials for \
+                return HttpResponse('Your dont have the credentials for \
                                      this page')
         return wrapper_func
     return decorator
@@ -36,7 +37,7 @@ def admin_only(view_func):
             group = request.user.groups.all()[0].name
 
         if group == 'customer':
-            return redirect('user-page')
+            return redirect('user_page')
 
         if group == 'admin':
             return view_func(request, *args, **kwargs)
