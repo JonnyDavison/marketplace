@@ -68,3 +68,7 @@ body {
     outline: 0px !important;
 }
 
+.text-black {
+    color: #000000;
+    text-decoration: none;
+}
