@@ -8,7 +8,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import *
-from .forms import OrderForm, CreateUserForm, CustomerForm
+from .forms import OrderForm, CreateUserForm, CustomerForm, ProductForm
 from .decorators import unauthenticated_user, allowed_users, admin_only
 # from .filters import OrderFilter
 
@@ -46,10 +46,17 @@ def customer(request, pk):
     orders = customer.order_set.all()
     order_count = orders.count()
 
+    total_orders = orders.count()
+    delivered = orders.filter(status='Delivered').count()
+    pending = orders.filter(status='Pending').count()
+
     context = {
         'customer': customer,
         'orders': orders,
-        'order_count': order_count
+        'order_count': order_count,
+        'total_orders': total_orders,
+        'delivered': delivered,
+        'pending': pending
         }
     return render(request, 'market/customer.html', context)
 
@@ -64,6 +71,32 @@ def products(request):
     }
 
     return render(request, 'market/products.html', context)
+
+@login_required
+def add_product(request):
+    """ Add a product to the store """
+    if not request.user.is_superuser:
+        messages.error(request, "Please see admin to gain approved access")
+        return redirect(reverse('index'))
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save()
+            messages.success(request, 'Product added')
+            return redirect(reverse('products'))
+        else:
+            messages.error(request, 'Failed, please check form is valid.')
+    else:
+        form = ProductForm()
+
+    template = 'market/add_product.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
+
 
 
 @login_required(login_url='login')
@@ -128,7 +161,7 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-            
+
             messages.success(request, 'Account was created for ' + username)
             return redirect('login')
 
