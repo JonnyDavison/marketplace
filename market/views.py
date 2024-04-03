@@ -77,7 +77,7 @@ def add_product(request):
     """ Add a product to the store """
     if not request.user.is_superuser:
         messages.error(request, "Please see admin to gain approved access")
-        return redirect(reverse('index'))
+        return redirect(reverse('/'))
 
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
@@ -97,6 +97,34 @@ def add_product(request):
 
     return render(request, template, context)
 
+@login_required
+def edit_product(request, product_id):
+    """ Edit a product """
+    if not request.user.is_superuser:
+        messages.error(request, "Please see admin to gain approved access")
+        return redirect(reverse('/'))
+
+    product = get_object_or_404(Product, pk=product_id)
+    
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Product Updated')
+            return redirect(reverse('products'))
+        else:
+            messages.error(request, 'Product Update Failed. Please check the form and retry.')
+    else:
+        form = ProductForm(instance=product)
+        messages.info(request, f'You are editing {product.name}')
+
+    template = 'market/edit_product.html'
+    context = {
+        'form': form,
+        'product': product,
+    }
+
+    return render(request, template, context)
 
 
 @login_required(login_url='login')

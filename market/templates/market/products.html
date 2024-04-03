@@ -10,6 +10,14 @@
             <h5>Products</h5>
         </div>
         <div class="card card-body">
+            {% if request.user.is_superuser %}
+            <small class="ml-3 text-end">
+                <a class="btn btn-primary" href="{% url 'add_product' %}">Add Product</a>
+
+              
+            </small>
+            {% endif %}
+
             <table class="table">
                 <tr>
                     <th>Product</th>
@@ -17,18 +25,23 @@
                     <th>Price</th>
                 </tr>
 
-                {% for p in products %}
+                {% for product in products %}
                 <tr>
                     <td>
-                        {{ p.name }}
+                        {{ product.name }}
                     </td>
                     <td>
-                        {{ p.category }}
+                        {{ product.category }}
                     </td>
                     <td>
-                        {{ p.price }}
+                        {{ product.price }}
+                    </td>
+                    <td>
+                        <a href="{% url 'edit_product' product.id %}">Edit</a>
                     </td>
                 </tr>
+                
+               
                 {% endfor %}
 
             </table>
