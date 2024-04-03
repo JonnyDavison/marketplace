@@ -37,7 +37,8 @@
                         {{ product.price }}
                     </td>
                     <td>
-                        <a href="{% url 'edit_product' product.id %}">Edit</a>
+                        <a class="btn btn btn-primary" href="{% url 'edit_product' product.id %}">Edit</a>
+                        <a class="btn btn-danger" href="{% url 'delete_product' product.id %}">Delete</a>
                     </td>
                 </tr>
                 

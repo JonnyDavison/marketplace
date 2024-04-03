@@ -126,6 +126,18 @@ def edit_product(request, product_id):
 
     return render(request, template, context)
 
+@login_required
+def delete_product(request, product_id):
+    """ Delete a product """
+    if not request.user.is_superuser:
+        messages.error(request, "Please see admin to gain approved access")
+        return redirect(reverse('/'))
+
+    product = get_object_or_404(Product, pk=product_id)
+    product.delete()
+    messages.success(request, 'Product deleted.')
+    return redirect(reverse('products'))
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
