@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
-    'market',
+    'market.apps.MarketConfig',
 ]
 
 MIDDLEWARE = [
