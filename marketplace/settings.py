@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'cloudinary_storage',
-    'django.contrib.staticfiles',
     'django.contrib.sites',
     'cloudinary',
 
@@ -53,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'market.apps.MarketConfig',
+    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
@@ -159,7 +159,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 import django_heroku 
-django_heroku.settings(local())
+django_heroku.settings(locals())
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
