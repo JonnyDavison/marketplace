@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'market.apps.MarketConfig',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 ]
 
